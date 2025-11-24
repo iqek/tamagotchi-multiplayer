@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>tamagotchi >_<</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Tamagotchi</h1>
+
+    <div id="controls">
+      <label>Room ID: <input id="roomId" value="room1"></label>
+      <label>Your name: <input id="playerName" value="P1"></label>
+      <button id="joinBtn">Join Room</button>
+      <div id="playersCount">Players: 0</div>
+    </div>
+
+    <div id="game" style="display:none">
+      <div id="pet">
+        <div class="stat">Hunger: <span id="hunger">—</span></div>
+        <div class="stat">Happiness: <span id="happiness">—</span></div>
+        <div class="stat">Cleanliness: <span id="cleanliness">—</span></div>
+      </div>
+
+      <div id="actions">
+        <button data-action="feed">Feed</button>
+        <button data-action="play">Play</button>
+        <button data-action="clean">Clean</button>
+      </div>
+
+      <div id="log"></div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/client.js"></script>
+</body>
+</html>
