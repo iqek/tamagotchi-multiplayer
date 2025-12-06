@@ -17,5 +17,5 @@ It is built using Node.js, Express, Socket.IO, and MongoDB. The frontend is not 
 1. Clone the repo:
 
 ```bash
-git clone https://github.com/<your-username>/tamagotchi-multiplayer.git
+git clone https://github.com/iqek/tamagotchi-multiplayer.git
 cd tamagotchi-multiplayer
