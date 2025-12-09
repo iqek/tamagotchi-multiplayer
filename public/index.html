@@ -2,35 +2,54 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>tamagotchi >_<</title>
-  <link rel="stylesheet" href="/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamagotchi >_<</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>Tamagotchi</h1>
 
-    <div id="controls">
-      <label>Room ID: <input id="roomId" value="room1"></label>
-      <label>Your name: <input id="playerName" value="P1"></label>
-      <button id="joinBtn">Join Room</button>
-      <div id="playersCount">Players: 0</div>
+  <!-- JOIN SECTION -->
+  <div id="joinSection">
+    <h1>Join Room</h1>
+
+    <div>
+      <label>Room ID:</label>
+      <input id="roomId" type="text">
     </div>
 
-    <div id="game" style="display:none">
-      <div id="pet">
-        <div class="stat">Hunger: <span id="hunger">—</span></div>
-        <div class="stat">Happiness: <span id="happiness">—</span></div>
-        <div class="stat">Cleanliness: <span id="cleanliness">—</span></div>
-      </div>
-
-      <div id="actions">
-        <button data-action="feed">Feed</button>
-        <button data-action="play">Play</button>
-        <button data-action="clean">Clean</button>
-      </div>
-
-      <div id="log"></div>
+    <div>
+      <label>Player Name:</label>
+      <input id="playerName" type="text">
     </div>
+
+    <button id="joinBtn">Join</button>
+  </div>
+
+
+  <!-- GAME SECTION (STARTS HIDDEN) -->
+  <div id="game" class="hidden">
+
+    <h2>Players in Room: <span id="playersCount">0</span></h2>
+
+    <img id="petImage" src="" alt="pet">
+
+    <p>Hunger: <span id="hunger">0</span></p>
+    <div><div id="hungerBar"></div></div>
+
+    <p>Happiness: <span id="happiness">0</span></p>
+    <div><div id="happinessBar"></div></div>
+
+    <p>Cleanliness: <span id="cleanliness">0</span></p>
+    <div><div id="cleanlinessBar"></div></div>
+
+    <div id="actions">
+      <button data-action="feed">Feed</button>
+      <button data-action="play">Play</button>
+      <button data-action="clean">Clean</button>
+    </div>
+
+    <pre id="log"></pre>
+
   </div>
 
   <script src="/socket.io/socket.io.js"></script>

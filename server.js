@@ -105,10 +105,11 @@ io.on('connection', (socket) => {
 
       const pet = await getOrCreatePet(roomId);
       const action = data.action;
+      const playerName = socket.data.playerName;
 
       // basic action effects
       if (action === 'feed') {
-        pet.hunger = clamp(pet.hunger - (data.amount || 20)); // doyur
+        pet.hunger = clamp(pet.hunger - (data.amount || 20));
         pet.happiness = clamp(pet.happiness + 2);
       } else if (action === 'play') {
         pet.happiness = clamp(pet.happiness + (data.amount || 15));
@@ -123,14 +124,23 @@ io.on('connection', (socket) => {
       pet.lastUpdated = new Date();
       await pet.save();
 
-      // broadcast updated pet state to room
-      io.to(roomId).emit('petState', {
-        roomId,
-        hunger: pet.hunger,
-        happiness: pet.happiness,
-        cleanliness: pet.cleanliness,
-        lastUpdated: pet.lastUpdated
+      // FIRST: broadcast the action animation to everyone
+      io.to(roomId).emit('petAction', {
+        action: action,
+        playerName: playerName
       });
+
+      // THEN: broadcast updated pet state to room (slight delay to ensure action is processed first)
+      setTimeout(() => {
+        io.to(roomId).emit('petState', {
+          roomId,
+          hunger: pet.hunger,
+          happiness: pet.happiness,
+          cleanliness: pet.cleanliness,
+          lastUpdated: pet.lastUpdated
+        });
+      }, 50);
+      
     } catch (err) {
       console.error('action error', err);
     }
